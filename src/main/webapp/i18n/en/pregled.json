@@ -1,0 +1,27 @@
+{
+  "pacijentApp": {
+    "pregled": {
+      "home": {
+        "title": "Pregleds",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Pregled",
+        "createOrEditLabel": "Create or edit a Pregled",
+        "notFound": "No Pregleds found"
+      },
+      "created": "A new Pregled is created with identifier {{ param }}",
+      "updated": "A Pregled is updated with identifier {{ param }}",
+      "deleted": "A Pregled is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pregled {{ id }}?"
+      },
+      "detail": {
+        "title": "Pregled"
+      },
+      "id": "ID",
+      "ime": "Ime",
+      "tip": "Tip",
+      "user": "User",
+      "ustanove": "Ustanove"
+    }
+  }
+}

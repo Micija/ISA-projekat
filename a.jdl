@@ -1,0 +1,34 @@
+application {
+  config {
+    baseName pacijent
+    applicationType monolith
+    packageName com.pacijent
+    buildTool maven,
+    testFrameworks [cypress]
+  }
+  entities *
+}
+
+entity Pregled {
+  ime String required minlength(3)
+  tip TIP
+}
+
+entity Ustanove {
+  ime String required minlength(3)
+}
+
+enum TIP {
+    HITAN
+    REDOVAN
+}
+
+relationship ManyToOne {
+  Pregled{user(login)} to User
+}
+
+relationship OneToOne {
+ Ustanove to Pregled
+}
+
+paginate Ustanove, Pregled with infinite-scroll

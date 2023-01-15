@@ -1,0 +1,30 @@
+{
+  "applications": ["pacijent"],
+  "changelogDate": "20230109203738",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "ustanove",
+  "fields": [
+    {
+      "fieldName": "ime",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength"],
+      "fieldValidateRulesMinlength": "3"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Ustanove",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "pregled",
+      "otherEntityRelationshipName": "ustanove",
+      "ownerSide": true,
+      "relationshipName": "pregled",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

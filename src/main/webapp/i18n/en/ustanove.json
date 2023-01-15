@@ -1,0 +1,25 @@
+{
+  "pacijentApp": {
+    "ustanove": {
+      "home": {
+        "title": "Ustanoves",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Ustanove",
+        "createOrEditLabel": "Create or edit a Ustanove",
+        "notFound": "No Ustanoves found"
+      },
+      "created": "A new Ustanove is created with identifier {{ param }}",
+      "updated": "A Ustanove is updated with identifier {{ param }}",
+      "deleted": "A Ustanove is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Ustanove {{ id }}?"
+      },
+      "detail": {
+        "title": "Ustanove"
+      },
+      "id": "ID",
+      "ime": "Ime",
+      "pregled": "Pregled"
+    }
+  }
+}

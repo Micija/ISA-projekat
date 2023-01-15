@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pregled">
+      <h2 data-cy="pregledDetailsHeading"><span jhiTranslate="pacijentApp.pregled.detail.title">Pregled</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ pregled.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pregled.ime">Ime</span></dt>
+        <dd>
+          <span>{{ pregled.ime }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pregled.tip">Tip</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'pacijentApp.TIP.' + pregled.tip }}">{{ pregled.tip }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pregled.user">User</span></dt>
+        <dd>
+          <span>{{ pregled.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pregled', pregled.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
