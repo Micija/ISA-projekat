@@ -1,9 +1,9 @@
-import { IPregled } from 'app/entities/pregled/pregled.model';
-
 export interface IUstanove {
   id: number;
   ime?: string | null;
-  pregled?: Pick<IPregled, 'id'> | null;
+  adresa?: string | null;
+  telefon?: string | null;
+  email?: string | null;
 }
 
 export type NewUstanove = Omit<IUstanove, 'id'> & { id: null };

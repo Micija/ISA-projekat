@@ -35,10 +35,11 @@ public class Pregled implements Serializable {
     private TIP tip;
 
     @ManyToOne
-    private User user;
+    @JsonIgnoreProperties(value = { "pregleds" }, allowSetters = true)
+    private Pacijent pacijent;
 
-    @JsonIgnoreProperties(value = { "pregled" }, allowSetters = true)
-    @OneToOne(mappedBy = "pregled")
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "pregleds" }, allowSetters = true)
     private Ustanove ustanove;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -82,16 +83,16 @@ public class Pregled implements Serializable {
         this.tip = tip;
     }
 
-    public User getUser() {
-        return this.user;
+    public Pacijent getPacijent() {
+        return this.pacijent;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPacijent(Pacijent pacijent) {
+        this.pacijent = pacijent;
     }
 
-    public Pregled user(User user) {
-        this.setUser(user);
+    public Pregled pacijent(Pacijent pacijent) {
+        this.setPacijent(pacijent);
         return this;
     }
 
@@ -100,12 +101,6 @@ public class Pregled implements Serializable {
     }
 
     public void setUstanove(Ustanove ustanove) {
-        if (this.ustanove != null) {
-            this.ustanove.setPregled(null);
-        }
-        if (ustanove != null) {
-            ustanove.setPregled(this);
-        }
         this.ustanove = ustanove;
     }
 

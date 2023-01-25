@@ -19,6 +19,9 @@
       },
       "id": "ID",
       "ime": "Ime",
+      "adresa": "Adresa",
+      "telefon": "Telefon",
+      "email": "Email",
       "pregled": "Pregled"
     }
   }

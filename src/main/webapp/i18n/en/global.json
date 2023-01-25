@@ -9,6 +9,7 @@
         "main": "Entities",
         "pregled": "Pregled",
         "ustanove": "Ustanove",
+        "pacijent": "Pacijent",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

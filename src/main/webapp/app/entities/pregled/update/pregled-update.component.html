@@ -40,10 +40,32 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="pacijentApp.pregled.user" for="field_user">User</label>
-          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+          <label class="form-label" jhiTranslate="pacijentApp.pregled.pacijent" for="field_pacijent">Pacijent</label>
+          <select
+            class="form-control"
+            id="field_pacijent"
+            data-cy="pacijent"
+            name="pacijent"
+            formControlName="pacijent"
+            [compareWith]="comparePacijent"
+          >
             <option [ngValue]="null"></option>
-            <option [ngValue]="userOption" *ngFor="let userOption of usersSharedCollection">{{ userOption.login }}</option>
+            <option [ngValue]="pacijentOption" *ngFor="let pacijentOption of pacijentsSharedCollection">{{ pacijentOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pacijentApp.pregled.ustanove" for="field_ustanove">Ustanove</label>
+          <select
+            class="form-control"
+            id="field_ustanove"
+            data-cy="ustanove"
+            name="ustanove"
+            formControlName="ustanove"
+            [compareWith]="compareUstanove"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="ustanoveOption" *ngFor="let ustanoveOption of ustanovesSharedCollection">{{ ustanoveOption.id }}</option>
           </select>
         </div>
       </div>

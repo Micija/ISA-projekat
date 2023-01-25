@@ -44,9 +44,21 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="pregled.id">
+          <th scope="col" jhiSortBy="adresa">
             <div class="d-flex">
-              <span jhiTranslate="pacijentApp.ustanove.pregled">Pregled</span>
+              <span jhiTranslate="pacijentApp.ustanove.adresa">Adresa</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="telefon">
+            <div class="d-flex">
+              <span jhiTranslate="pacijentApp.ustanove.telefon">Telefon</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span jhiTranslate="pacijentApp.ustanove.email">Email</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -64,11 +76,9 @@
             <a [routerLink]="['/ustanove', ustanove.id, 'view']">{{ ustanove.id }}</a>
           </td>
           <td>{{ ustanove.ime }}</td>
-          <td>
-            <div *ngIf="ustanove.pregled">
-              <a [routerLink]="['/pregled', ustanove.pregled.id, 'view']">{{ ustanove.pregled.id }}</a>
-            </div>
-          </td>
+          <td>{{ ustanove.adresa }}</td>
+          <td>{{ ustanove.telefon }}</td>
+          <td>{{ ustanove.email }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

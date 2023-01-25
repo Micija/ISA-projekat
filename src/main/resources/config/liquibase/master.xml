@@ -19,9 +19,9 @@
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230109203638_added_entity_Pregled.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230109203738_added_entity_Ustanove.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230124212910_added_entity_Pacijent.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20230109203638_added_entity_constraints_Pregled.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230109203738_added_entity_constraints_Ustanove.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

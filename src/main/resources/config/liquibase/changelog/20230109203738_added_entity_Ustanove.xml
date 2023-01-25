@@ -17,8 +17,14 @@
             <column name="ime" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="pregled_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_ustanove__pregled_id" />
+            <column name="adresa" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="telefon" type="varchar(9)">
+                <constraints nullable="false" />
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -42,6 +48,9 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="ime" type="string"/>
+            <column name="adresa" type="string"/>
+            <column name="telefon" type="string"/>
+            <column name="email" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

@@ -8,8 +8,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
@@ -154,33 +152,12 @@ public class PregledResource {
      * {@code GET  /pregleds} : get all the pregleds.
      *
      * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pregleds in body.
      */
     @GetMapping("/pregleds")
-    public ResponseEntity<List<Pregled>> getAllPregleds(
-        @org.springdoc.api.annotations.ParameterObject Pageable pageable,
-        @RequestParam(required = false) String filter,
-        @RequestParam(required = false, defaultValue = "false") boolean eagerload
-    ) {
-        if ("ustanove-is-null".equals(filter)) {
-            log.debug("REST request to get all Pregleds where ustanove is null");
-            return new ResponseEntity<>(
-                StreamSupport
-                    .stream(pregledRepository.findAll().spliterator(), false)
-                    .filter(pregled -> pregled.getUstanove() == null)
-                    .collect(Collectors.toList()),
-                HttpStatus.OK
-            );
-        }
+    public ResponseEntity<List<Pregled>> getAllPregleds(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of Pregleds");
-        Page<Pregled> page;
-        if (eagerload) {
-            page = pregledRepository.findAllWithEagerRelationships(pageable);
-        } else {
-            page = pregledRepository.findAll(pageable);
-        }
+        Page<Pregled> page = pregledRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -194,7 +171,7 @@ public class PregledResource {
     @GetMapping("/pregleds/{id}")
     public ResponseEntity<Pregled> getPregled(@PathVariable Long id) {
         log.debug("REST request to get Pregled : {}", id);
-        Optional<Pregled> pregled = pregledRepository.findOneWithEagerRelationships(id);
+        Optional<Pregled> pregled = pregledRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(pregled);
     }
 

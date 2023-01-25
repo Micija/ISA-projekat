@@ -2,7 +2,6 @@ package com.pacijent.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -10,21 +9,14 @@ import com.pacijent.IntegrationTest;
 import com.pacijent.domain.Pregled;
 import com.pacijent.domain.enumeration.TIP;
 import com.pacijent.repository.PregledRepository;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -34,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link PregledResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class PregledResourceIT {
@@ -53,9 +44,6 @@ class PregledResourceIT {
 
     @Autowired
     private PregledRepository pregledRepository;
-
-    @Mock
-    private PregledRepository pregledRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -158,23 +146,6 @@ class PregledResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(pregled.getId().intValue())))
             .andExpect(jsonPath("$.[*].ime").value(hasItem(DEFAULT_IME)))
             .andExpect(jsonPath("$.[*].tip").value(hasItem(DEFAULT_TIP.toString())));
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllPregledsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(pregledRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restPregledMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(pregledRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllPregledsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(pregledRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restPregledMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(pregledRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test

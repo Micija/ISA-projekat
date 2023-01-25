@@ -50,9 +50,15 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="user.login">
+          <th scope="col" jhiSortBy="pacijent.id">
             <div class="d-flex">
-              <span jhiTranslate="pacijentApp.pregled.user">User</span>
+              <span jhiTranslate="pacijentApp.pregled.pacijent">Pacijent</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ustanove.id">
+            <div class="d-flex">
+              <span jhiTranslate="pacijentApp.pregled.ustanove">Ustanove</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -72,7 +78,14 @@
           <td>{{ pregled.ime }}</td>
           <td jhiTranslate="{{ 'pacijentApp.TIP.' + pregled.tip }}">{{ pregled.tip }}</td>
           <td>
-            {{ pregled.user?.login }}
+            <div *ngIf="pregled.pacijent">
+              <a [routerLink]="['/pacijent', pregled.pacijent.id, 'view']">{{ pregled.pacijent.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="pregled.ustanove">
+              <a [routerLink]="['/ustanove', pregled.ustanove.id, 'view']">{{ pregled.ustanove.id }}</a>
+            </div>
           </td>
           <td class="text-end">
             <div class="btn-group">

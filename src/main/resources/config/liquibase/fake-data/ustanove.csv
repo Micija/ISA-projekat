@@ -1,11 +1,9 @@
-id;ime
-1;Table
-2;state
-3;array
-4;Accountability Colorado
-5;iterate
-6;payment Loan
-7;Awesome
-8;Baby Steel Montenegro
-9;payment
-10;Wooden
+
+id;ime;adresa;telefon;email
+1;Citilab;Prvomajska 18;0644460909;citilabaratorija@yahoo.com
+2;Aqualab;Osamnaestog okobra 12;0634446050;aqualabaratorija@gmail.com
+3;Labaratorija Beograd;Stefana Nemanje 24;0640609434;labaratorijaBeograd@gmail.com
+4;Poliklinika Beo;Bulevar Cara Dusana 1;0662109485;poliklinikaBEO@gmail.com
+5;NS centar za transfuziju krvi;Novosadska 22;0634098746;nscentar89@hotmail.com
+6;Labaratorija Biomedika;Urosa Nejakog 6;0648673925;biomedikalab@gmail.com
+7;Institut za transfuziju;Gogoljeva 21;0635522503;institutzatransfuziju@hotmail.com

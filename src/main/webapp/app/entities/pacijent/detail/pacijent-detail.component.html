@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pacijent">
+      <h2 data-cy="pacijentDetailsHeading"><span jhiTranslate="pacijentApp.pacijent.detail.title">Pacijent</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ pacijent.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pacijent.ime">Ime</span></dt>
+        <dd>
+          <span>{{ pacijent.ime }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pacijent.prezime">Prezime</span></dt>
+        <dd>
+          <span>{{ pacijent.prezime }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pacijent.jmbg">Jmbg</span></dt>
+        <dd>
+          <span>{{ pacijent.jmbg }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pacijent.adresa">Adresa</span></dt>
+        <dd>
+          <span>{{ pacijent.adresa }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pacijent.telefon">Telefon</span></dt>
+        <dd>
+          <span>{{ pacijent.telefon }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pacijent.email">Email</span></dt>
+        <dd>
+          <span>{{ pacijent.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pacijent.datumRodjenja">Datum Rodjenja</span></dt>
+        <dd>
+          <span>{{ pacijent.datumRodjenja | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pacijent.pol">Pol</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'pacijentApp.POL.' + pacijent.pol }}">{{ pacijent.pol }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pacijent', pacijent.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

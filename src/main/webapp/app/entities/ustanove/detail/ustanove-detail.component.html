@@ -18,11 +18,17 @@
         <dd>
           <span>{{ ustanove.ime }}</span>
         </dd>
-        <dt><span jhiTranslate="pacijentApp.ustanove.pregled">Pregled</span></dt>
+        <dt><span jhiTranslate="pacijentApp.ustanove.adresa">Adresa</span></dt>
         <dd>
-          <div *ngIf="ustanove.pregled">
-            <a [routerLink]="['/pregled', ustanove.pregled.id, 'view']">{{ ustanove.pregled.id }}</a>
-          </div>
+          <span>{{ ustanove.adresa }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.ustanove.telefon">Telefon</span></dt>
+        <dd>
+          <span>{{ ustanove.telefon }}</span>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.ustanove.email">Email</span></dt>
+        <dd>
+          <span>{{ ustanove.email }}</span>
         </dd>
       </dl>
 

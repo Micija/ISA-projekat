@@ -1,0 +1,137 @@
+<div>
+  <h2 id="page-heading" data-cy="PacijentHeading">
+    <span jhiTranslate="pacijentApp.pacijent.home.title">Pacijents</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pacijentApp.pacijent.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-pacijent"
+        [routerLink]="['/pacijent/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pacijentApp.pacijent.home.createLabel"> Create a new Pacijent </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="pacijents?.length === 0">
+    <span jhiTranslate="pacijentApp.pacijent.home.notFound">No Pacijents found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="pacijents && pacijents.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ime">
+            <div class="d-flex">
+              <span jhiTranslate="pacijentApp.pacijent.ime">Ime</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="prezime">
+            <div class="d-flex">
+              <span jhiTranslate="pacijentApp.pacijent.prezime">Prezime</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="jmbg">
+            <div class="d-flex">
+              <span jhiTranslate="pacijentApp.pacijent.jmbg">Jmbg</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="adresa">
+            <div class="d-flex">
+              <span jhiTranslate="pacijentApp.pacijent.adresa">Adresa</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="telefon">
+            <div class="d-flex">
+              <span jhiTranslate="pacijentApp.pacijent.telefon">Telefon</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span jhiTranslate="pacijentApp.pacijent.email">Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="datumRodjenja">
+            <div class="d-flex">
+              <span jhiTranslate="pacijentApp.pacijent.datumRodjenja">Datum Rodjenja</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="pol">
+            <div class="d-flex">
+              <span jhiTranslate="pacijentApp.pacijent.pol">Pol</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pacijent of pacijents; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/pacijent', pacijent.id, 'view']">{{ pacijent.id }}</a>
+          </td>
+          <td>{{ pacijent.ime }}</td>
+          <td>{{ pacijent.prezime }}</td>
+          <td>{{ pacijent.jmbg }}</td>
+          <td>{{ pacijent.adresa }}</td>
+          <td>{{ pacijent.telefon }}</td>
+          <td>{{ pacijent.email }}</td>
+          <td>{{ pacijent.datumRodjenja | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'pacijentApp.POL.' + pacijent.pol }}">{{ pacijent.pol }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/pacijent', pacijent.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/pacijent', pacijent.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(pacijent)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

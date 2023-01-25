@@ -2,6 +2,8 @@ package com.pacijent.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -29,10 +31,25 @@ public class Ustanove implements Serializable {
     @Column(name = "ime", nullable = false)
     private String ime;
 
-    @JsonIgnoreProperties(value = { "user", "ustanove" }, allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Pregled pregled;
+    @NotNull
+    @Size(min = 3)
+    @Column(name = "adresa", nullable = false)
+    private String adresa;
+
+    @NotNull
+    @Size(min = 9, max = 9)
+    @Column(name = "telefon", length = 9, nullable = false)
+    private String telefon;
+
+    @NotNull
+    @Size(min = 3)
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @OneToMany(mappedBy = "ustanove")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "pacijent", "ustanove" }, allowSetters = true)
+    private Set<Pregled> pregleds = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -62,16 +79,73 @@ public class Ustanove implements Serializable {
         this.ime = ime;
     }
 
-    public Pregled getPregled() {
-        return this.pregled;
+    public String getAdresa() {
+        return this.adresa;
     }
 
-    public void setPregled(Pregled pregled) {
-        this.pregled = pregled;
+    public Ustanove adresa(String adresa) {
+        this.setAdresa(adresa);
+        return this;
     }
 
-    public Ustanove pregled(Pregled pregled) {
-        this.setPregled(pregled);
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
+    }
+
+    public String getTelefon() {
+        return this.telefon;
+    }
+
+    public Ustanove telefon(String telefon) {
+        this.setTelefon(telefon);
+        return this;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public Ustanove email(String email) {
+        this.setEmail(email);
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Set<Pregled> getPregleds() {
+        return this.pregleds;
+    }
+
+    public void setPregleds(Set<Pregled> pregleds) {
+        if (this.pregleds != null) {
+            this.pregleds.forEach(i -> i.setUstanove(null));
+        }
+        if (pregleds != null) {
+            pregleds.forEach(i -> i.setUstanove(this));
+        }
+        this.pregleds = pregleds;
+    }
+
+    public Ustanove pregleds(Set<Pregled> pregleds) {
+        this.setPregleds(pregleds);
+        return this;
+    }
+
+    public Ustanove addPregled(Pregled pregled) {
+        this.pregleds.add(pregled);
+        pregled.setUstanove(this);
+        return this;
+    }
+
+    public Ustanove removePregled(Pregled pregled) {
+        this.pregleds.remove(pregled);
+        pregled.setUstanove(null);
         return this;
     }
 
@@ -100,6 +174,9 @@ public class Ustanove implements Serializable {
         return "Ustanove{" +
             "id=" + getId() +
             ", ime='" + getIme() + "'" +
+            ", adresa='" + getAdresa() + "'" +
+            ", telefon='" + getTelefon() + "'" +
+            ", email='" + getEmail() + "'" +
             "}";
     }
 }

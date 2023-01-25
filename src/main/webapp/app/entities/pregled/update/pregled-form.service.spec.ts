@@ -22,7 +22,8 @@ describe('Pregled Form Service', () => {
             id: expect.any(Object),
             ime: expect.any(Object),
             tip: expect.any(Object),
-            user: expect.any(Object),
+            pacijent: expect.any(Object),
+            ustanove: expect.any(Object),
           })
         );
       });
@@ -35,7 +36,8 @@ describe('Pregled Form Service', () => {
             id: expect.any(Object),
             ime: expect.any(Object),
             tip: expect.any(Object),
-            user: expect.any(Object),
+            pacijent: expect.any(Object),
+            ustanove: expect.any(Object),
           })
         );
       });

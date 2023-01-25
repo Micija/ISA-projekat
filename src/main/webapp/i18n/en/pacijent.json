@@ -1,0 +1,32 @@
+{
+  "pacijentApp": {
+    "pacijent": {
+      "home": {
+        "title": "Pacijents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Pacijent",
+        "createOrEditLabel": "Create or edit a Pacijent",
+        "notFound": "No Pacijents found"
+      },
+      "created": "A new Pacijent is created with identifier {{ param }}",
+      "updated": "A Pacijent is updated with identifier {{ param }}",
+      "deleted": "A Pacijent is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pacijent {{ id }}?"
+      },
+      "detail": {
+        "title": "Pacijent"
+      },
+      "id": "ID",
+      "ime": "Ime",
+      "prezime": "Prezime",
+      "jmbg": "Jmbg",
+      "adresa": "Adresa",
+      "telefon": "Telefon",
+      "email": "Email",
+      "datumRodjenja": "Datum Rodjenja",
+      "pol": "Pol",
+      "pregled": "Pregled"
+    }
+  }
+}

@@ -9,8 +9,6 @@ import { of, Subject, from } from 'rxjs';
 import { UstanoveFormService } from './ustanove-form.service';
 import { UstanoveService } from '../service/ustanove.service';
 import { IUstanove } from '../ustanove.model';
-import { IPregled } from 'app/entities/pregled/pregled.model';
-import { PregledService } from 'app/entities/pregled/service/pregled.service';
 
 import { UstanoveUpdateComponent } from './ustanove-update.component';
 
@@ -20,7 +18,6 @@ describe('Ustanove Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let ustanoveFormService: UstanoveFormService;
   let ustanoveService: UstanoveService;
-  let pregledService: PregledService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -43,39 +40,17 @@ describe('Ustanove Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     ustanoveFormService = TestBed.inject(UstanoveFormService);
     ustanoveService = TestBed.inject(UstanoveService);
-    pregledService = TestBed.inject(PregledService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('Should call pregled query and add missing value', () => {
-      const ustanove: IUstanove = { id: 456 };
-      const pregled: IPregled = { id: 32935 };
-      ustanove.pregled = pregled;
-
-      const pregledCollection: IPregled[] = [{ id: 12371 }];
-      jest.spyOn(pregledService, 'query').mockReturnValue(of(new HttpResponse({ body: pregledCollection })));
-      const expectedCollection: IPregled[] = [pregled, ...pregledCollection];
-      jest.spyOn(pregledService, 'addPregledToCollectionIfMissing').mockReturnValue(expectedCollection);
-
-      activatedRoute.data = of({ ustanove });
-      comp.ngOnInit();
-
-      expect(pregledService.query).toHaveBeenCalled();
-      expect(pregledService.addPregledToCollectionIfMissing).toHaveBeenCalledWith(pregledCollection, pregled);
-      expect(comp.pregledsCollection).toEqual(expectedCollection);
-    });
-
     it('Should update editForm', () => {
       const ustanove: IUstanove = { id: 456 };
-      const pregled: IPregled = { id: 88992 };
-      ustanove.pregled = pregled;
 
       activatedRoute.data = of({ ustanove });
       comp.ngOnInit();
 
-      expect(comp.pregledsCollection).toContain(pregled);
       expect(comp.ustanove).toEqual(ustanove);
     });
   });
@@ -145,18 +120,6 @@ describe('Ustanove Management Update Component', () => {
       expect(ustanoveService.update).toHaveBeenCalled();
       expect(comp.isSaving).toEqual(false);
       expect(comp.previousState).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('Compare relationships', () => {
-    describe('comparePregled', () => {
-      it('Should forward to pregledService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
-        jest.spyOn(pregledService, 'comparePregled');
-        comp.comparePregled(entity, entity2);
-        expect(pregledService.comparePregled).toHaveBeenCalledWith(entity, entity2);
-      });
     });
   });
 });

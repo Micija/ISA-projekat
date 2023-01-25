@@ -1,0 +1,9 @@
+{
+  "pacijentApp": {
+    "POL": {
+      "null": "",
+      "MUSKO": "Muško",
+      "ZENSKO": "Žensko"
+    }
+  }
+}

@@ -22,9 +22,17 @@
         <dd>
           <span jhiTranslate="{{ 'pacijentApp.TIP.' + pregled.tip }}">{{ pregled.tip }}</span>
         </dd>
-        <dt><span jhiTranslate="pacijentApp.pregled.user">User</span></dt>
+        <dt><span jhiTranslate="pacijentApp.pregled.pacijent">Pacijent</span></dt>
         <dd>
-          <span>{{ pregled.user?.login }}</span>
+          <div *ngIf="pregled.pacijent">
+            <a [routerLink]="['/pacijent', pregled.pacijent.id, 'view']">{{ pregled.pacijent.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pacijentApp.pregled.ustanove">Ustanove</span></dt>
+        <dd>
+          <div *ngIf="pregled.ustanove">
+            <a [routerLink]="['/ustanove', pregled.ustanove.id, 'view']">{{ pregled.ustanove.id }}</a>
+          </div>
         </dd>
       </dl>
 

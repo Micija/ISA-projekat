@@ -20,7 +20,8 @@ type PregledFormGroupContent = {
   id: FormControl<IPregled['id'] | NewPregled['id']>;
   ime: FormControl<IPregled['ime']>;
   tip: FormControl<IPregled['tip']>;
-  user: FormControl<IPregled['user']>;
+  pacijent: FormControl<IPregled['pacijent']>;
+  ustanove: FormControl<IPregled['ustanove']>;
 };
 
 export type PregledFormGroup = FormGroup<PregledFormGroupContent>;
@@ -44,7 +45,8 @@ export class PregledFormService {
         validators: [Validators.required, Validators.minLength(3)],
       }),
       tip: new FormControl(pregledRawValue.tip),
-      user: new FormControl(pregledRawValue.user),
+      pacijent: new FormControl(pregledRawValue.pacijent),
+      ustanove: new FormControl(pregledRawValue.ustanove),
     });
   }
 

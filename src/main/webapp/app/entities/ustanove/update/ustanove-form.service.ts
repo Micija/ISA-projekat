@@ -19,7 +19,9 @@ type UstanoveFormDefaults = Pick<NewUstanove, 'id'>;
 type UstanoveFormGroupContent = {
   id: FormControl<IUstanove['id'] | NewUstanove['id']>;
   ime: FormControl<IUstanove['ime']>;
-  pregled: FormControl<IUstanove['pregled']>;
+  adresa: FormControl<IUstanove['adresa']>;
+  telefon: FormControl<IUstanove['telefon']>;
+  email: FormControl<IUstanove['email']>;
 };
 
 export type UstanoveFormGroup = FormGroup<UstanoveFormGroupContent>;
@@ -42,7 +44,15 @@ export class UstanoveFormService {
       ime: new FormControl(ustanoveRawValue.ime, {
         validators: [Validators.required, Validators.minLength(3)],
       }),
-      pregled: new FormControl(ustanoveRawValue.pregled),
+      adresa: new FormControl(ustanoveRawValue.adresa, {
+        validators: [Validators.required, Validators.minLength(3)],
+      }),
+      telefon: new FormControl(ustanoveRawValue.telefon, {
+        validators: [Validators.required, Validators.minLength(9), Validators.maxLength(9)],
+      }),
+      email: new FormControl(ustanoveRawValue.email, {
+        validators: [Validators.required, Validators.minLength(3)],
+      }),
     });
   }
 

@@ -24,17 +24,16 @@
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityField": "login",
-      "otherEntityName": "user",
-      "relationshipName": "user",
+      "otherEntityName": "pacijent",
+      "otherEntityRelationshipName": "pregled",
+      "relationshipName": "pacijent",
       "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "ustanove",
       "otherEntityRelationshipName": "pregled",
-      "ownerSide": false,
       "relationshipName": "ustanove",
-      "relationshipType": "one-to-one"
+      "relationshipType": "many-to-one"
     }
   ],
   "service": "no"

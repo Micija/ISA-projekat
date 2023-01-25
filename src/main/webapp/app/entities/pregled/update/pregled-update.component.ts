@@ -7,8 +7,10 @@ import { finalize, map } from 'rxjs/operators';
 import { PregledFormService, PregledFormGroup } from './pregled-form.service';
 import { IPregled } from '../pregled.model';
 import { PregledService } from '../service/pregled.service';
-import { IUser } from 'app/entities/user/user.model';
-import { UserService } from 'app/entities/user/user.service';
+import { IPacijent } from 'app/entities/pacijent/pacijent.model';
+import { PacijentService } from 'app/entities/pacijent/service/pacijent.service';
+import { IUstanove } from 'app/entities/ustanove/ustanove.model';
+import { UstanoveService } from 'app/entities/ustanove/service/ustanove.service';
 import { TIP } from 'app/entities/enumerations/tip.model';
 
 @Component({
@@ -20,18 +22,22 @@ export class PregledUpdateComponent implements OnInit {
   pregled: IPregled | null = null;
   tIPValues = Object.keys(TIP);
 
-  usersSharedCollection: IUser[] = [];
+  pacijentsSharedCollection: IPacijent[] = [];
+  ustanovesSharedCollection: IUstanove[] = [];
 
   editForm: PregledFormGroup = this.pregledFormService.createPregledFormGroup();
 
   constructor(
     protected pregledService: PregledService,
     protected pregledFormService: PregledFormService,
-    protected userService: UserService,
+    protected pacijentService: PacijentService,
+    protected ustanoveService: UstanoveService,
     protected activatedRoute: ActivatedRoute
   ) {}
 
-  compareUser = (o1: IUser | null, o2: IUser | null): boolean => this.userService.compareUser(o1, o2);
+  comparePacijent = (o1: IPacijent | null, o2: IPacijent | null): boolean => this.pacijentService.comparePacijent(o1, o2);
+
+  compareUstanove = (o1: IUstanove | null, o2: IUstanove | null): boolean => this.ustanoveService.compareUstanove(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ pregled }) => {
@@ -81,14 +87,31 @@ export class PregledUpdateComponent implements OnInit {
     this.pregled = pregled;
     this.pregledFormService.resetForm(this.editForm, pregled);
 
-    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing<IUser>(this.usersSharedCollection, pregled.user);
+    this.pacijentsSharedCollection = this.pacijentService.addPacijentToCollectionIfMissing<IPacijent>(
+      this.pacijentsSharedCollection,
+      pregled.pacijent
+    );
+    this.ustanovesSharedCollection = this.ustanoveService.addUstanoveToCollectionIfMissing<IUstanove>(
+      this.ustanovesSharedCollection,
+      pregled.ustanove
+    );
   }
 
   protected loadRelationshipsOptions(): void {
-    this.userService
+    this.pacijentService
       .query()
-      .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
-      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing<IUser>(users, this.pregled?.user)))
-      .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
+      .pipe(map((res: HttpResponse<IPacijent[]>) => res.body ?? []))
+      .pipe(
+        map((pacijents: IPacijent[]) => this.pacijentService.addPacijentToCollectionIfMissing<IPacijent>(pacijents, this.pregled?.pacijent))
+      )
+      .subscribe((pacijents: IPacijent[]) => (this.pacijentsSharedCollection = pacijents));
+
+    this.ustanoveService
+      .query()
+      .pipe(map((res: HttpResponse<IUstanove[]>) => res.body ?? []))
+      .pipe(
+        map((ustanoves: IUstanove[]) => this.ustanoveService.addUstanoveToCollectionIfMissing<IUstanove>(ustanoves, this.pregled?.ustanove))
+      )
+      .subscribe((ustanoves: IUstanove[]) => (this.ustanovesSharedCollection = ustanoves));
   }
 }

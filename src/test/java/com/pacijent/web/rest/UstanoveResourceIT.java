@@ -32,6 +32,15 @@ class UstanoveResourceIT {
     private static final String DEFAULT_IME = "AAAAAAAAAA";
     private static final String UPDATED_IME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_ADRESA = "AAAAAAAAAA";
+    private static final String UPDATED_ADRESA = "BBBBBBBBBB";
+
+    private static final String DEFAULT_TELEFON = "AAAAAAAAA";
+    private static final String UPDATED_TELEFON = "BBBBBBBBB";
+
+    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
+    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/ustanoves";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -56,7 +65,7 @@ class UstanoveResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Ustanove createEntity(EntityManager em) {
-        Ustanove ustanove = new Ustanove().ime(DEFAULT_IME);
+        Ustanove ustanove = new Ustanove().ime(DEFAULT_IME).adresa(DEFAULT_ADRESA).telefon(DEFAULT_TELEFON).email(DEFAULT_EMAIL);
         return ustanove;
     }
 
@@ -67,7 +76,7 @@ class UstanoveResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Ustanove createUpdatedEntity(EntityManager em) {
-        Ustanove ustanove = new Ustanove().ime(UPDATED_IME);
+        Ustanove ustanove = new Ustanove().ime(UPDATED_IME).adresa(UPDATED_ADRESA).telefon(UPDATED_TELEFON).email(UPDATED_EMAIL);
         return ustanove;
     }
 
@@ -90,6 +99,9 @@ class UstanoveResourceIT {
         assertThat(ustanoveList).hasSize(databaseSizeBeforeCreate + 1);
         Ustanove testUstanove = ustanoveList.get(ustanoveList.size() - 1);
         assertThat(testUstanove.getIme()).isEqualTo(DEFAULT_IME);
+        assertThat(testUstanove.getAdresa()).isEqualTo(DEFAULT_ADRESA);
+        assertThat(testUstanove.getTelefon()).isEqualTo(DEFAULT_TELEFON);
+        assertThat(testUstanove.getEmail()).isEqualTo(DEFAULT_EMAIL);
     }
 
     @Test
@@ -129,6 +141,57 @@ class UstanoveResourceIT {
 
     @Test
     @Transactional
+    void checkAdresaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = ustanoveRepository.findAll().size();
+        // set the field null
+        ustanove.setAdresa(null);
+
+        // Create the Ustanove, which fails.
+
+        restUstanoveMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(ustanove)))
+            .andExpect(status().isBadRequest());
+
+        List<Ustanove> ustanoveList = ustanoveRepository.findAll();
+        assertThat(ustanoveList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkTelefonIsRequired() throws Exception {
+        int databaseSizeBeforeTest = ustanoveRepository.findAll().size();
+        // set the field null
+        ustanove.setTelefon(null);
+
+        // Create the Ustanove, which fails.
+
+        restUstanoveMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(ustanove)))
+            .andExpect(status().isBadRequest());
+
+        List<Ustanove> ustanoveList = ustanoveRepository.findAll();
+        assertThat(ustanoveList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkEmailIsRequired() throws Exception {
+        int databaseSizeBeforeTest = ustanoveRepository.findAll().size();
+        // set the field null
+        ustanove.setEmail(null);
+
+        // Create the Ustanove, which fails.
+
+        restUstanoveMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(ustanove)))
+            .andExpect(status().isBadRequest());
+
+        List<Ustanove> ustanoveList = ustanoveRepository.findAll();
+        assertThat(ustanoveList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllUstanoves() throws Exception {
         // Initialize the database
         ustanoveRepository.saveAndFlush(ustanove);
@@ -139,7 +202,10 @@ class UstanoveResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ustanove.getId().intValue())))
-            .andExpect(jsonPath("$.[*].ime").value(hasItem(DEFAULT_IME)));
+            .andExpect(jsonPath("$.[*].ime").value(hasItem(DEFAULT_IME)))
+            .andExpect(jsonPath("$.[*].adresa").value(hasItem(DEFAULT_ADRESA)))
+            .andExpect(jsonPath("$.[*].telefon").value(hasItem(DEFAULT_TELEFON)))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)));
     }
 
     @Test
@@ -154,7 +220,10 @@ class UstanoveResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(ustanove.getId().intValue()))
-            .andExpect(jsonPath("$.ime").value(DEFAULT_IME));
+            .andExpect(jsonPath("$.ime").value(DEFAULT_IME))
+            .andExpect(jsonPath("$.adresa").value(DEFAULT_ADRESA))
+            .andExpect(jsonPath("$.telefon").value(DEFAULT_TELEFON))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL));
     }
 
     @Test
@@ -176,7 +245,7 @@ class UstanoveResourceIT {
         Ustanove updatedUstanove = ustanoveRepository.findById(ustanove.getId()).get();
         // Disconnect from session so that the updates on updatedUstanove are not directly saved in db
         em.detach(updatedUstanove);
-        updatedUstanove.ime(UPDATED_IME);
+        updatedUstanove.ime(UPDATED_IME).adresa(UPDATED_ADRESA).telefon(UPDATED_TELEFON).email(UPDATED_EMAIL);
 
         restUstanoveMockMvc
             .perform(
@@ -191,6 +260,9 @@ class UstanoveResourceIT {
         assertThat(ustanoveList).hasSize(databaseSizeBeforeUpdate);
         Ustanove testUstanove = ustanoveList.get(ustanoveList.size() - 1);
         assertThat(testUstanove.getIme()).isEqualTo(UPDATED_IME);
+        assertThat(testUstanove.getAdresa()).isEqualTo(UPDATED_ADRESA);
+        assertThat(testUstanove.getTelefon()).isEqualTo(UPDATED_TELEFON);
+        assertThat(testUstanove.getEmail()).isEqualTo(UPDATED_EMAIL);
     }
 
     @Test
@@ -261,7 +333,7 @@ class UstanoveResourceIT {
         Ustanove partialUpdatedUstanove = new Ustanove();
         partialUpdatedUstanove.setId(ustanove.getId());
 
-        partialUpdatedUstanove.ime(UPDATED_IME);
+        partialUpdatedUstanove.ime(UPDATED_IME).adresa(UPDATED_ADRESA);
 
         restUstanoveMockMvc
             .perform(
@@ -276,6 +348,9 @@ class UstanoveResourceIT {
         assertThat(ustanoveList).hasSize(databaseSizeBeforeUpdate);
         Ustanove testUstanove = ustanoveList.get(ustanoveList.size() - 1);
         assertThat(testUstanove.getIme()).isEqualTo(UPDATED_IME);
+        assertThat(testUstanove.getAdresa()).isEqualTo(UPDATED_ADRESA);
+        assertThat(testUstanove.getTelefon()).isEqualTo(DEFAULT_TELEFON);
+        assertThat(testUstanove.getEmail()).isEqualTo(DEFAULT_EMAIL);
     }
 
     @Test
@@ -290,7 +365,7 @@ class UstanoveResourceIT {
         Ustanove partialUpdatedUstanove = new Ustanove();
         partialUpdatedUstanove.setId(ustanove.getId());
 
-        partialUpdatedUstanove.ime(UPDATED_IME);
+        partialUpdatedUstanove.ime(UPDATED_IME).adresa(UPDATED_ADRESA).telefon(UPDATED_TELEFON).email(UPDATED_EMAIL);
 
         restUstanoveMockMvc
             .perform(
@@ -305,6 +380,9 @@ class UstanoveResourceIT {
         assertThat(ustanoveList).hasSize(databaseSizeBeforeUpdate);
         Ustanove testUstanove = ustanoveList.get(ustanoveList.size() - 1);
         assertThat(testUstanove.getIme()).isEqualTo(UPDATED_IME);
+        assertThat(testUstanove.getAdresa()).isEqualTo(UPDATED_ADRESA);
+        assertThat(testUstanove.getTelefon()).isEqualTo(UPDATED_TELEFON);
+        assertThat(testUstanove.getEmail()).isEqualTo(UPDATED_EMAIL);
     }
 
     @Test

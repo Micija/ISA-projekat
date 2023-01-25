@@ -21,7 +21,9 @@ describe('Ustanove Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             ime: expect.any(Object),
-            pregled: expect.any(Object),
+            adresa: expect.any(Object),
+            telefon: expect.any(Object),
+            email: expect.any(Object),
           })
         );
       });
@@ -33,7 +35,9 @@ describe('Ustanove Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             ime: expect.any(Object),
-            pregled: expect.any(Object),
+            adresa: expect.any(Object),
+            telefon: expect.any(Object),
+            email: expect.any(Object),
           })
         );
       });

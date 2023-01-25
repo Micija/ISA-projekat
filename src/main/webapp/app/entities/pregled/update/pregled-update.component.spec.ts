@@ -9,9 +9,10 @@ import { of, Subject, from } from 'rxjs';
 import { PregledFormService } from './pregled-form.service';
 import { PregledService } from '../service/pregled.service';
 import { IPregled } from '../pregled.model';
-
-import { IUser } from 'app/entities/user/user.model';
-import { UserService } from 'app/entities/user/user.service';
+import { IPacijent } from 'app/entities/pacijent/pacijent.model';
+import { PacijentService } from 'app/entities/pacijent/service/pacijent.service';
+import { IUstanove } from 'app/entities/ustanove/ustanove.model';
+import { UstanoveService } from 'app/entities/ustanove/service/ustanove.service';
 
 import { PregledUpdateComponent } from './pregled-update.component';
 
@@ -21,7 +22,8 @@ describe('Pregled Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let pregledFormService: PregledFormService;
   let pregledService: PregledService;
-  let userService: UserService;
+  let pacijentService: PacijentService;
+  let ustanoveService: UstanoveService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -44,43 +46,69 @@ describe('Pregled Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     pregledFormService = TestBed.inject(PregledFormService);
     pregledService = TestBed.inject(PregledService);
-    userService = TestBed.inject(UserService);
+    pacijentService = TestBed.inject(PacijentService);
+    ustanoveService = TestBed.inject(UstanoveService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('Should call User query and add missing value', () => {
+    it('Should call Pacijent query and add missing value', () => {
       const pregled: IPregled = { id: 456 };
-      const user: IUser = { id: 80020 };
-      pregled.user = user;
+      const pacijent: IPacijent = { id: 59683 };
+      pregled.pacijent = pacijent;
 
-      const userCollection: IUser[] = [{ id: 35041 }];
-      jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-      const additionalUsers = [user];
-      const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
-      jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
+      const pacijentCollection: IPacijent[] = [{ id: 46709 }];
+      jest.spyOn(pacijentService, 'query').mockReturnValue(of(new HttpResponse({ body: pacijentCollection })));
+      const additionalPacijents = [pacijent];
+      const expectedCollection: IPacijent[] = [...additionalPacijents, ...pacijentCollection];
+      jest.spyOn(pacijentService, 'addPacijentToCollectionIfMissing').mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ pregled });
       comp.ngOnInit();
 
-      expect(userService.query).toHaveBeenCalled();
-      expect(userService.addUserToCollectionIfMissing).toHaveBeenCalledWith(
-        userCollection,
-        ...additionalUsers.map(expect.objectContaining)
+      expect(pacijentService.query).toHaveBeenCalled();
+      expect(pacijentService.addPacijentToCollectionIfMissing).toHaveBeenCalledWith(
+        pacijentCollection,
+        ...additionalPacijents.map(expect.objectContaining)
       );
-      expect(comp.usersSharedCollection).toEqual(expectedCollection);
+      expect(comp.pacijentsSharedCollection).toEqual(expectedCollection);
+    });
+
+    it('Should call Ustanove query and add missing value', () => {
+      const pregled: IPregled = { id: 456 };
+      const ustanove: IUstanove = { id: 93129 };
+      pregled.ustanove = ustanove;
+
+      const ustanoveCollection: IUstanove[] = [{ id: 72110 }];
+      jest.spyOn(ustanoveService, 'query').mockReturnValue(of(new HttpResponse({ body: ustanoveCollection })));
+      const additionalUstanoves = [ustanove];
+      const expectedCollection: IUstanove[] = [...additionalUstanoves, ...ustanoveCollection];
+      jest.spyOn(ustanoveService, 'addUstanoveToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ pregled });
+      comp.ngOnInit();
+
+      expect(ustanoveService.query).toHaveBeenCalled();
+      expect(ustanoveService.addUstanoveToCollectionIfMissing).toHaveBeenCalledWith(
+        ustanoveCollection,
+        ...additionalUstanoves.map(expect.objectContaining)
+      );
+      expect(comp.ustanovesSharedCollection).toEqual(expectedCollection);
     });
 
     it('Should update editForm', () => {
       const pregled: IPregled = { id: 456 };
-      const user: IUser = { id: 72030 };
-      pregled.user = user;
+      const pacijent: IPacijent = { id: 89686 };
+      pregled.pacijent = pacijent;
+      const ustanove: IUstanove = { id: 52963 };
+      pregled.ustanove = ustanove;
 
       activatedRoute.data = of({ pregled });
       comp.ngOnInit();
 
-      expect(comp.usersSharedCollection).toContain(user);
+      expect(comp.pacijentsSharedCollection).toContain(pacijent);
+      expect(comp.ustanovesSharedCollection).toContain(ustanove);
       expect(comp.pregled).toEqual(pregled);
     });
   });
@@ -154,13 +182,23 @@ describe('Pregled Management Update Component', () => {
   });
 
   describe('Compare relationships', () => {
-    describe('compareUser', () => {
-      it('Should forward to userService', () => {
+    describe('comparePacijent', () => {
+      it('Should forward to pacijentService', () => {
         const entity = { id: 123 };
         const entity2 = { id: 456 };
-        jest.spyOn(userService, 'compareUser');
-        comp.compareUser(entity, entity2);
-        expect(userService.compareUser).toHaveBeenCalledWith(entity, entity2);
+        jest.spyOn(pacijentService, 'comparePacijent');
+        comp.comparePacijent(entity, entity2);
+        expect(pacijentService.comparePacijent).toHaveBeenCalledWith(entity, entity2);
+      });
+    });
+
+    describe('compareUstanove', () => {
+      it('Should forward to ustanoveService', () => {
+        const entity = { id: 123 };
+        const entity2 = { id: 456 };
+        jest.spyOn(ustanoveService, 'compareUstanove');
+        comp.compareUstanove(entity, entity2);
+        expect(ustanoveService.compareUstanove).toHaveBeenCalledWith(entity, entity2);
       });
     });
   });

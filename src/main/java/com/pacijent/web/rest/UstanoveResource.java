@@ -134,6 +134,15 @@ public class UstanoveResource {
                 if (ustanove.getIme() != null) {
                     existingUstanove.setIme(ustanove.getIme());
                 }
+                if (ustanove.getAdresa() != null) {
+                    existingUstanove.setAdresa(ustanove.getAdresa());
+                }
+                if (ustanove.getTelefon() != null) {
+                    existingUstanove.setTelefon(ustanove.getTelefon());
+                }
+                if (ustanove.getEmail() != null) {
+                    existingUstanove.setEmail(ustanove.getEmail());
+                }
 
                 return existingUstanove;
             })

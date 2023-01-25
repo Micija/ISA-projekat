@@ -14,21 +14,44 @@ entity Pregled {
   tip TIP
 }
 
+entity Pacijent {
+  ime String required minlength(3)
+  prezime String required minlength(3)
+  jmbg String required minlength(13) maxlength(13)
+  adresa String required minlength(3)
+  telefon String required minlength(9) maxlength(9)
+  email String required minlength(3)
+  datumRodjenja ZonedDateTime required
+  pol POL
+}
+
 entity Ustanove {
   ime String required minlength(3)
+  adresa String required minlength(3)
+  telefon String required minlength(9) maxlength(9)
+  email String required minlength(3)
 }
 
 enum TIP {
-    HITAN
+	HITAN
     REDOVAN
 }
 
-relationship ManyToOne {
-  Pregled{user(login)} to User
+
+enum POL {
+    MUSKO("Muško")
+    ZENSKO("Žensko")
 }
 
-relationship OneToOne {
- Ustanove to Pregled
+relationship OneToMany {
+    Pacijent to Pregled
 }
+
+
+relationship OneToMany {
+    Ustanove to Pregled
+}
+
+
 
 paginate Ustanove, Pregled with infinite-scroll

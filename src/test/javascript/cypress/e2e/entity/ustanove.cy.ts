@@ -15,7 +15,7 @@ describe('Ustanove e2e test', () => {
   const ustanovePageUrlPattern = new RegExp('/ustanove(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const ustanoveSample = { ime: 'system-worthy 5th' };
+  const ustanoveSample = { ime: 'Unbranded neural', adresa: 'Assurance', telefon: 'online Hu', email: 'Christophe.Pouros84@hotmail.com' };
 
   let ustanove;
 
@@ -161,6 +161,12 @@ describe('Ustanove e2e test', () => {
 
     it('should create an instance of Ustanove', () => {
       cy.get(`[data-cy="ime"]`).type('paradigm open-source').should('have.value', 'paradigm open-source');
+
+      cy.get(`[data-cy="adresa"]`).type('system-worthy 5th').should('have.value', 'system-worthy 5th');
+
+      cy.get(`[data-cy="telefon"]`).type('synergyXX').should('have.value', 'synergyXX');
+
+      cy.get(`[data-cy="email"]`).type('Janis_Rogahn@hotmail.com').should('have.value', 'Janis_Rogahn@hotmail.com');
 
       cy.get(entityCreateSaveButtonSelector).click();
 

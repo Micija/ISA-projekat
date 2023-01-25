@@ -1,0 +1,11 @@
+id;ime;prezime;jmbg;adresa;telefon;email;datum_rodjenja;pol
+1;Sveto;Milic;1208983212122;Svetosavska 18;0643525560;svetomilic2@gmail.com;1983-08-12T10:01:14;MUSKO
+2;Pero;Maric;0303954242433;Cara Lazara 55;0656113335;peromaric23@gmail.com;1954-03-03T04:42:28;MUSKO
+3;Radmila;Lakic;1103999131329;Cirpanova 13;0635529867;radmilalakicc@hotmail.com;2023-01-24T07:45:46;ZENSKO
+4;Ljubica;Ilic;1111975123757;Bulevar Kralja Petra 5;0655230505;ljubicailic222@hotmail.com;1975-11-11T07:45:46;ZENSKO
+5;Rade;Samardzic;0202002456783;Bulevar Oslobodjenja 24;0633459898;radesamardziccc@hotmail.com;2002-02-02T04:42:28;MUSKO
+6;Miroslav;Klose;0202003564532;Filipa Visnjica 47;0649878768;miroslavklose89@gmail.com;2003-02-02T04:42:28;MUSKO
+7;Milica;Ribic;0202001968686;Temerinski put 25;0644989867;milicaribiccc@gmail.com;2001-02-02T04:42:28;ZENSKO
+8;Klea;Jamina;0202000955512;Oslobodilacka 22;0634328686;kleajaminaaa@hotmail.com;2000-02-02T04:42:28;ZENSKO
+9;Marko;Markovic;0303000929293;Ise Bajica 1;0659892233;markomarkovicmare@yahoo.com;2000-03-03T04:42:28;MUSKO
+10;Osman;Sehic;1111991848485;Alekse Santica 5;0654242200;osmansehic991@gmail.com;1991-11-11T04:42:28;MUSKO
