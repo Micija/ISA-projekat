@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34302.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISA.API", "ISA.API\ISA.API.csproj", "{4F4A3D4C-965E-47B3-935D-D7E66F890DEF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{A33B2121-C33C-460C-A311-76FB9B0D7BD8}"
+	ProjectSection(SolutionItems) = preProject
+		ISA.API\docker-compose.yml = ISA.API\docker-compose.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F4A3D4C-965E-47B3-935D-D7E66F890DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F4A3D4C-965E-47B3-935D-D7E66F890DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F4A3D4C-965E-47B3-935D-D7E66F890DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F4A3D4C-965E-47B3-935D-D7E66F890DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5663975-1475-410B-A709-4C7287CF57FD}
+	EndGlobalSection
+EndGlobal
