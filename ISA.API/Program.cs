@@ -1,4 +1,5 @@
 using ISA.API.EntityFramework;
+using ISA.API.Repository;
 using ISA.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -12,8 +13,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors();
+
 builder.Services.AddEfCore(builder.Configuration);
 
+builder.Services.RegisterRepositories();
 builder.Services.RegisterServices();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -37,6 +41,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader();
+    opt.AllowAnyOrigin();
+    opt.AllowAnyMethod();
+});
 
 app.UseHttpsRedirection();
 

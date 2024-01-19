@@ -1,5 +1,6 @@
 ﻿#nullable enable
 
+using ISA.API.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace ISA.API.Data.Models
@@ -8,5 +9,6 @@ namespace ISA.API.Data.Models
     {
         public string FirstName { get; set; } = default!;
         public string LastName { get; set; } = default!;
+        public virtual ICollection<ReservationEntity> Reservations { get; set; } = default!;
     }
 }

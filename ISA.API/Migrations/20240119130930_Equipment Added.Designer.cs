@@ -4,6 +4,7 @@ using ISA.API.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISA.API.Migrations
 {
     [DbContext(typeof(DataAccessContext))]
-    partial class DataAccessContextModelSnapshot : ModelSnapshot
+    [Migration("20240119130930_Equipment Added")]
+    partial class EquipmentAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,55 +72,6 @@ namespace ISA.API.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("equipment", (string)null);
-                });
-
-            modelBuilder.Entity("ISA.API.Data.Entities.ReservationEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("Reservations");
-                });
-
-            modelBuilder.Entity("ISA.API.Data.Entities.TermEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ReservationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("TermStart")
-                        .HasColumnType("date");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("ReservationId")
-                        .IsUnique()
-                        .HasFilter("[ReservationId] IS NOT NULL");
-
-                    b.ToTable("Terms");
                 });
 
             modelBuilder.Entity("ISA.API.Data.Models.UserEntity", b =>
@@ -337,32 +291,6 @@ namespace ISA.API.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("ISA.API.Data.Entities.ReservationEntity", b =>
-                {
-                    b.HasOne("ISA.API.Data.Models.UserEntity", "User")
-                        .WithMany("Reservations")
-                        .HasForeignKey("UserId1");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("ISA.API.Data.Entities.TermEntity", b =>
-                {
-                    b.HasOne("ISA.API.Data.Entities.CompanyEntity", "Company")
-                        .WithMany("Terms")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ISA.API.Data.Entities.ReservationEntity", "Reservation")
-                        .WithOne("Term")
-                        .HasForeignKey("ISA.API.Data.Entities.TermEntity", "ReservationId");
-
-                    b.Navigation("Company");
-
-                    b.Navigation("Reservation");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -417,18 +345,6 @@ namespace ISA.API.Migrations
             modelBuilder.Entity("ISA.API.Data.Entities.CompanyEntity", b =>
                 {
                     b.Navigation("Equipment");
-
-                    b.Navigation("Terms");
-                });
-
-            modelBuilder.Entity("ISA.API.Data.Entities.ReservationEntity", b =>
-                {
-                    b.Navigation("Term");
-                });
-
-            modelBuilder.Entity("ISA.API.Data.Models.UserEntity", b =>
-                {
-                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }

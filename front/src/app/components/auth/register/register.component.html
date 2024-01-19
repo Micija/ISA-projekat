@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="mt-5">
+      <h1 class="text-center">Registracija</h1>
+
+      <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <div class="form-group">
+          <label for="name">Ime</label>
+          <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required minlength="3" #name="ngModel" />
+          <div class="alert-danger" *ngIf="name.errors && f.submitted">
+            <div *ngIf="name.errors['required']">Ime je obavezno polje</div>
+            <div *ngIf="name.errors['minlength']">
+              Ime mora da sadrzi bar 3 karaktera
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Prezime</label>
+          <input type="text" class="form-control" name="lastName" [(ngModel)]="form.lastName" required minlength="3" #lastName="ngModel" />
+          <div class="alert-danger" *ngIf="lastName.errors && f.submitted">
+            <div *ngIf="lastName.errors['required']">Prezime je obavezno polje</div>
+            <div *ngIf="lastName.errors['minlength']">
+              Prezime mora da sadrzi barem 3 karaktera
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email
+            #email="ngModel" />
+          <div class="alert-danger" *ngIf="email.errors && f.submitted">
+            <div *ngIf="email.errors['required']">Email je obavezno polje</div>
+            <div *ngIf="email.errors['email']">
+              Neispravan format
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Lozinka</label>
+          <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+            #password="ngModel" />
+          <div class="alert-danger" *ngIf="password.errors && f.submitted">
+            <div *ngIf="password.errors['required']">Lozinka je obavezna</div>
+            <div *ngIf="password.errors['minlength']">
+              Lozinka mora da sarzi barem 6 karaktera
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="repeatedPassword">Ponovljena lozinka</label>
+          <input type="password" class="form-control" name="repeatedPassword" [(ngModel)]="form.repeatedPassword" required minlength="6"
+            #repeatedPassword="ngModel" />
+          <div class="alert-danger" *ngIf="repeatedPassword.errors && f.submitted">
+            <div *ngIf="repeatedPassword.errors['required']">Unesite ponovljenu lozinku</div>
+            <div *ngIf="repeatedPassword.errors['minlength']">
+              Ponovljena lozinka mora da sadrzi barem 6 karaktera
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <button class="btn btn-primary btn-block">Registracija</button>
+        </div>
+
+        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+          Registracija nije uspesna.<br />{{ errorMessage }}
+        </div>
+      </form>
+
+      <div class="alert alert-success" *ngIf="isSuccessful">
+        Uspesna registracija!
+      </div>
+    </div>
+  </div>
+</div>

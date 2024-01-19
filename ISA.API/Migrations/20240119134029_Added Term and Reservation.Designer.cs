@@ -4,6 +4,7 @@ using ISA.API.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISA.API.Migrations
 {
     [DbContext(typeof(DataAccessContext))]
-    partial class DataAccessContextModelSnapshot : ModelSnapshot
+    [Migration("20240119134029_Added Term and Reservation")]
+    partial class AddedTermandReservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -340,7 +343,7 @@ namespace ISA.API.Migrations
             modelBuilder.Entity("ISA.API.Data.Entities.ReservationEntity", b =>
                 {
                     b.HasOne("ISA.API.Data.Models.UserEntity", "User")
-                        .WithMany("Reservations")
+                        .WithMany()
                         .HasForeignKey("UserId1");
 
                     b.Navigation("User");
@@ -424,11 +427,6 @@ namespace ISA.API.Migrations
             modelBuilder.Entity("ISA.API.Data.Entities.ReservationEntity", b =>
                 {
                     b.Navigation("Term");
-                });
-
-            modelBuilder.Entity("ISA.API.Data.Models.UserEntity", b =>
-                {
-                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }

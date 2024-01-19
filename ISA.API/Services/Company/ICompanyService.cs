@@ -1,0 +1,8 @@
+﻿using ISA.API.Data.Entities;
+
+namespace ISA.API.Services.Company;
+
+public interface ICompanyService
+{
+    Task<IEnumerable<CompanyEntity>> GetAllAsync();
+}
