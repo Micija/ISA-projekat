@@ -20,4 +20,16 @@ public class CompanyController : ControllerBase
         var companies = await _companyService.GetAllAsync();
         return Ok(companies);
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<CompanyEntity?>> GetCompanyByIdAsync([FromRoute] int id)
+    {
+        var company = await _companyService.GetByIdAsync(id);
+        if (company == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(company);
+    }
 }

@@ -14,17 +14,14 @@ import { VerificationFailedComponent } from './components/verification-failed/ve
 import {MatSortModule} from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import  {MatInputModule } from '@angular/material/input';
+import  {MatSelectModule } from '@angular/material/select';
 import { CenterDetailsComponent } from './components/center-details/center-details.component';
 import { ToastrModule } from 'ngx-toastr';
-import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { AuthInterceptor, authInterceptorProviders } from './interceptors/auth.interceptor';
-import { ComplaintWritingComponent } from './components/complaint-writing/complaint-writing.component';
-import { MyComplaintsComponent } from './components/my-complaints/my-complaints.component';
-import { ComplaintAnswerComponent } from './components/complaint-answer/complaint-answer.component';
-import { ComplaintsAdminComponent } from './components/complaints-admin/complaints-admin.component';
 import { IndexComponent } from './components/index/index.component';
-import { ReservedAppointmentsComponent } from './components/reserved-appointments/reserved-appointments.component';
 import { CompanyListComponent } from './components/company/company-list/company-list.component';
+import { CompanyOverviewComponent } from './components/company/company-overview/company-overview.component';
 
 @NgModule({
   declarations: [
@@ -36,14 +33,9 @@ import { CompanyListComponent } from './components/company/company-list/company-
     VerificationSuccessfulComponent,
     VerificationFailedComponent,
     CenterDetailsComponent,
-    QuestionnaireComponent,
-    ComplaintWritingComponent,
-    MyComplaintsComponent,
-    ComplaintAnswerComponent,
-    ComplaintsAdminComponent,
     IndexComponent,
-    ReservedAppointmentsComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    CompanyOverviewComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +46,8 @@ import { CompanyListComponent } from './components/company/company-list/company-
     BrowserAnimationsModule,
     MatTableModule,
     BrowserAnimationsModule,
+    MatInputModule, 
+    MatSelectModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-bottom-right',

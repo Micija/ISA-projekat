@@ -5,8 +5,14 @@ import { IndexComponent } from './components/index/index.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { CompanyListComponent } from './components/company/company-list/company-list.component';
+import { CompanyOverviewComponent } from './components/company/company-overview/company-overview.component';
 
 const routes: Routes = [
+  {
+    path: 'company/:id',
+    component: CompanyOverviewComponent,
+    pathMatch: 'full',
+  },
   {
     path: 'company',
     component: CompanyListComponent,

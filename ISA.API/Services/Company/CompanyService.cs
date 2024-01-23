@@ -16,4 +16,9 @@ public class CompanyService: ICompanyService
     {
         return await _repository.GetAllAsync();
     }
+
+    public async Task<CompanyEntity?> GetByIdAsync(int id)
+    {
+        return await _repository.GetByIdAsync(id);
+    }
 }

@@ -18,4 +18,9 @@ public class CompanyRepository: ICompanyRepository
     {
         return await DbContext.Companies.ToListAsync();
     }
+
+    public async Task<CompanyEntity?> GetByIdAsync(int id)
+    {
+        return await DbContext.Companies.Where(e => e.Id == id).FirstOrDefaultAsync();
+    }
 }
