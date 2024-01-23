@@ -60,7 +60,7 @@ export class AuthService {
   }
 
   public getToken(): string | null {
-    return this.user$.value?.token;
+    return this.user$.value?.jwt;
   }
 
   public saveUser(user: AuthenticatedUser): void {

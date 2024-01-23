@@ -1,6 +1,7 @@
 ﻿using ISA.API.Services.Account;
 using ISA.API.Services.Company;
 using ISA.API.Services.Equipment;
+using ISA.API.Services.Reservation;
 using ISA.API.Services.Term;
 using ISA.API.Services.Util;
 
@@ -14,6 +15,7 @@ public static class ServiceCollectionExtension
         services.AddScoped<ICompanyService, CompanyService>();
         services.AddScoped<IEquipmentService, EquipmentService>();
         services.AddScoped<ITermService, TermService>();
+        services.AddScoped<IReservationService, ReservationService>();
         services.AddScoped<JwtService>();
 
         return services;

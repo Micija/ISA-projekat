@@ -13,6 +13,11 @@ public class TermRepository : ITermRepository
         this.DbContext = dbContext;
     }
 
+    public Task<TermEntity?> GetByIdAsync(int termId)
+    {
+        return DbContext.Terms.Where(e => e.Id == termId).FirstOrDefaultAsync();
+    }
+
     public async Task<IEnumerable<TermEntity>> GetListByCompanyIdAsync(int companyId)
     {
         return await DbContext.Terms.Where(e => e.CompanyId == companyId).ToListAsync();

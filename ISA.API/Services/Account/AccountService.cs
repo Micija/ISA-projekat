@@ -55,6 +55,7 @@ public class AccountService : IAccountService
 
         return new LoginResponse
         {
+            Id = user.Id,
             FirstName = user.FirstName,
             LastName = user.LastName,
             Jwt = await _jwtService.CreateJwt(user)

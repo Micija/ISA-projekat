@@ -1,8 +1,6 @@
 export default interface AuthenticatedUser {
   id: string;
-  name: string;
-  lastName: string;
-  email: string;
-  token: string;
+  firstName: string;
+  jwt: string;
   role: string;
 }

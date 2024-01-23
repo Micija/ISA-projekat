@@ -3,6 +3,7 @@
 public class EquipmentEntity
 {
     public virtual CompanyEntity Company { get; set; } = default!;
+    public virtual ICollection<ReservationItemEntity> ReservationItems { get; set; } = default!;
     public int Id { get; set; }
     public string Name { get; set; } = default!;
     public string Tag { get; set; } = default!;

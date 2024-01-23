@@ -16,7 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import  {MatInputModule } from '@angular/material/input';
 import  {MatSelectModule } from '@angular/material/select';
-import { CenterDetailsComponent } from './components/center-details/center-details.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor, authInterceptorProviders } from './interceptors/auth.interceptor';
 import { IndexComponent } from './components/index/index.component';
@@ -32,7 +31,6 @@ import { CompanyOverviewComponent } from './components/company/company-overview/
     LoginComponent,
     VerificationSuccessfulComponent,
     VerificationFailedComponent,
-    CenterDetailsComponent,
     IndexComponent,
     CompanyListComponent,
     CompanyOverviewComponent
