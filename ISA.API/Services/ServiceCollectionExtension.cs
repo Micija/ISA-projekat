@@ -4,6 +4,8 @@ using ISA.API.Services.Equipment;
 using ISA.API.Services.Reservation;
 using ISA.API.Services.Term;
 using ISA.API.Services.Util;
+using ISA.API.Services.Util.Email;
+using ISA.API.Services.Util.QrCode;
 
 namespace ISA.API.Services;
 public static class ServiceCollectionExtension
@@ -16,6 +18,8 @@ public static class ServiceCollectionExtension
         services.AddScoped<IEquipmentService, EquipmentService>();
         services.AddScoped<ITermService, TermService>();
         services.AddScoped<IReservationService, ReservationService>();
+        services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<IQrCodeService, QrCodeService>();
         services.AddScoped<JwtService>();
 
         return services;

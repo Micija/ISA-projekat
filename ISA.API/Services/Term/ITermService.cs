@@ -4,5 +4,5 @@ namespace ISA.API.Services.Term;
 
 public interface ITermService
 {
-    Task<IEnumerable<TermEntity>> GetListByCompanyIdAsync(int companyId);
+    Task<IEnumerable<TermEntity>> GetAvailableListByCompanyIdAsync(int companyId);
 }

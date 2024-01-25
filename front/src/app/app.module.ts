@@ -21,6 +21,7 @@ import { AuthInterceptor, authInterceptorProviders } from './interceptors/auth.i
 import { IndexComponent } from './components/index/index.component';
 import { CompanyListComponent } from './components/company/company-list/company-list.component';
 import { CompanyOverviewComponent } from './components/company/company-overview/company-overview.component';
+import { MyReservationsComponent } from './components/reservation/my-reservations/my-reservations.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CompanyOverviewComponent } from './components/company/company-overview/
     VerificationFailedComponent,
     IndexComponent,
     CompanyListComponent,
-    CompanyOverviewComponent
+    CompanyOverviewComponent,
+    MyReservationsComponent
   ],
   imports: [
     BrowserModule,

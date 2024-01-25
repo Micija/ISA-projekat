@@ -15,6 +15,7 @@ namespace ISA.API.EntityFramework
         public virtual DbSet<TermEntity> Terms { get; set; }
         public virtual DbSet<ReservationEntity> Reservations { get; set; }
         public virtual DbSet<ReservationItemEntity> ReservationItems { get; set; }
+        public virtual DbSet<ReservationHistoryEntity> ReservationHistories { get; set; }
 
         public DataAccessContext(
             DbContextOptions options) : base(options)
@@ -31,6 +32,7 @@ namespace ISA.API.EntityFramework
             builder.ApplyConfiguration(new ReservationConfiguration());
             builder.ApplyConfiguration(new ReservationItemConfiguration());
             builder.ApplyConfiguration(new TermConfiguration());
+            builder.ApplyConfiguration(new ReservationHistoryConfiguration());
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

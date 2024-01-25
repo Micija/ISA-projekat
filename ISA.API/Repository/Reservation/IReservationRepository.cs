@@ -6,4 +6,6 @@ public interface IReservationRepository
 {
     Task<ReservationEntity> Create(ReservationEntity entity);
     Task<ReservationItemEntity> CreateItem(ReservationItemEntity entity);
+    Task<ReservationEntity?> GetByIdAsync(int reservationId);
+    Task<IEnumerable<ReservationEntity>> GetListByUserIdAsync(string userId);
 }

@@ -6,4 +6,5 @@ public interface ITermRepository
 {
     Task<TermEntity?> GetByIdAsync(int termId);
     Task<IEnumerable<TermEntity>> GetListByCompanyIdAsync(int companyId);
+    Task UpdateUnSetReservation(int id);
 }

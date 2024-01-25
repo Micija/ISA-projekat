@@ -1,5 +1,6 @@
 ﻿using ISA.API.Data.Entities;
 using ISA.API.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 namespace ISA.API.Repository.Reservation;
 
@@ -25,4 +26,15 @@ public class ReservationRepository : IReservationRepository
         await DbContext.SaveChangesAsync();
         return created.Entity;
     }
+
+    public async Task<ReservationEntity?> GetByIdAsync(int reservationId)
+    {
+        return await DbContext.Reservations.AsNoTracking().Include(e => e.Term).FirstOrDefaultAsync(e => e.Id == reservationId);
+    }
+
+    public async Task<IEnumerable<ReservationEntity>> GetListByUserIdAsync(string userId)
+    {
+        return await DbContext.Reservations.Include(e => e.Term).Where(e => e.Term != null && e.UserId.Equals(userId)).OrderByDescending(e => e.Term.TermStart).ToListAsync();
+    }
+
 }

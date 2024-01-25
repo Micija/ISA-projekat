@@ -13,7 +13,7 @@ public class TermConfiguration : IEntityTypeConfiguration<TermEntity>
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.TermStart)
-            .HasColumnType("date")
+            .HasColumnType("datetime")
             .IsRequired(true);
 
         builder.HasOne(e => e.Reservation).WithOne(e => e.Term).HasForeignKey<TermEntity>(e => e.ReservationId).IsRequired(false);

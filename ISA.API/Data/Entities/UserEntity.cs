@@ -9,6 +9,7 @@ namespace ISA.API.Data.Models
     {
         public string FirstName { get; set; } = default!;
         public string LastName { get; set; } = default!;
+        public int PenalPoints { get; set; }
         public virtual ICollection<ReservationEntity> Reservations { get; set; } = default!;
     }
 }

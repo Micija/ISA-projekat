@@ -4,6 +4,7 @@ using ISA.API.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISA.API.Migrations
 {
     [DbContext(typeof(DataAccessContext))]
-    partial class DataAccessContextModelSnapshot : ModelSnapshot
+    [Migration("20240125091634_Term start date changed to datetime")]
+    partial class Termstartdatechangedtodatetime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,26 +93,6 @@ namespace ISA.API.Migrations
                     b.ToTable("reservations", (string)null);
                 });
 
-            modelBuilder.Entity("ISA.API.Data.Entities.ReservationHistoryEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("reservation_history", (string)null);
-                });
-
             modelBuilder.Entity("ISA.API.Data.Entities.ReservationItemEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -151,7 +134,7 @@ namespace ISA.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("TermStart")
-                        .HasColumnType("datetime");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
@@ -207,9 +190,6 @@ namespace ISA.API.Migrations
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PenalPoints")
-                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");

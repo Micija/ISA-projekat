@@ -6,6 +6,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { CompanyListComponent } from './components/company/company-list/company-list.component';
 import { CompanyOverviewComponent } from './components/company/company-overview/company-overview.component';
+import { MyReservationsComponent } from './components/reservation/my-reservations/my-reservations.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: 'company',
     component: CompanyListComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'my-reservations',
+    component: MyReservationsComponent,
     pathMatch: 'full',
   },
   {

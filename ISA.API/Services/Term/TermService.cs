@@ -11,8 +11,9 @@ public class TermService : ITermService
     {
         _termRepository = termRepository;
     }
-    public async Task<IEnumerable<TermEntity>> GetListByCompanyIdAsync(int companyId)
+    public async Task<IEnumerable<TermEntity>> GetAvailableListByCompanyIdAsync(int companyId)
     {
-        return await _termRepository.GetListByCompanyIdAsync(companyId);
+        return (await _termRepository.GetListByCompanyIdAsync(companyId)).Where(e => e.ReservationId == null && e.TermStart > DateTime.Now);
     }
+
 }

@@ -4,6 +4,7 @@ using ISA.API.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISA.API.Migrations
 {
     [DbContext(typeof(DataAccessContext))]
-    partial class DataAccessContextModelSnapshot : ModelSnapshot
+    [Migration("20240125091706_Term start date changed to datetime fix")]
+    partial class Termstartdatechangedtodatetimefix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,26 +91,6 @@ namespace ISA.API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("reservations", (string)null);
-                });
-
-            modelBuilder.Entity("ISA.API.Data.Entities.ReservationHistoryEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("reservation_history", (string)null);
                 });
 
             modelBuilder.Entity("ISA.API.Data.Entities.ReservationItemEntity", b =>
@@ -207,9 +190,6 @@ namespace ISA.API.Migrations
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PenalPoints")
-                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
