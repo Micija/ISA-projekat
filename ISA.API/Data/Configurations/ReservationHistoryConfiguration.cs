@@ -12,7 +12,7 @@ public class ReservationHistoryConfiguration : IEntityTypeConfiguration<Reservat
 
         builder.HasKey(e => e.Id);
 
-        builder.Property(e => e.ReservationId).IsRequired(true);
+        builder.Property(e => e.TermId).IsRequired(true);
 
         builder.Property(e => e.UserId).IsRequired(true);
     }

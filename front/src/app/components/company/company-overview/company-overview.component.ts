@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
@@ -104,7 +105,29 @@ export class CompanyOverviewComponent implements OnInit {
     this.reservationService.createReservation(reservation)
     .subscribe({
       next: data => {
-        console.log('PASSED')
+        alert('Rezervacija uspesno sacuvana')
+        this.temrsService.getListByCompanyId(this.companyId).subscribe({
+          next: data => {
+            this.availableTerms=data;
+            this.equipmentService.getListByCompanyId(this.companyId)
+              .subscribe({
+                next: data => {
+                  this.equipment = data.map(e => {
+                    return {
+                      id: e.id,
+                      name: e.name,
+                      tag: e.tag,
+                      availableQuantity: e.availableQuantity,
+                      selectedQuantity: 0
+                    }
+                  });
+                }
+              });
+          }
+        })
+      },
+      error: (err: HttpErrorResponse) => {
+        alert(err.error);
       }
     })
 

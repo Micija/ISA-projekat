@@ -67,10 +67,14 @@ public class ReservationService : IReservationService
 
     }
 
-    [Produces(MediaTypeNames.Application.Json)]
-    [Authorize]
     public async Task CreateReservation(CreateReservationModel model, string userId, string userEmail)
     {
+        var history = await _reservationRepository.GetByUserIdAndTermId(userId, model.TermId);
+        if (history != null)
+        {
+            throw new ArgumentException();
+        }
+
         var termId = model.TermId;
         var term = await _termRepository.GetByIdAsync(termId);
         if (term == null)
@@ -97,6 +101,7 @@ public class ReservationService : IReservationService
         {
             await _reservationRepository.CreateItem(item);
         }
+
         var qrCode = _qrCodeService.CreateQRCode("test");
         var attach = new Attachment(new MemoryStream(qrCode), "qr-code.png", MediaTypeNames.Application.Octet);
 

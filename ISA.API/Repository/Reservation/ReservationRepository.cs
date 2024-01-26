@@ -17,6 +17,15 @@ public class ReservationRepository : IReservationRepository
     {
         var created = await DbContext.Reservations.AddAsync(entity);
         await DbContext.SaveChangesAsync();
+
+        var history = new ReservationHistoryEntity
+        {
+            TermId = (await DbContext.Terms.Where(e=>e.ReservationId == created.Entity.Id).FirstAsync()).Id,
+            UserId = created.Entity.UserId
+        };
+        await DbContext.ReservationHistories.AddAsync(history);
+        await DbContext.SaveChangesAsync();
+
         return created.Entity;
     }
 
@@ -30,6 +39,11 @@ public class ReservationRepository : IReservationRepository
     public async Task<ReservationEntity?> GetByIdAsync(int reservationId)
     {
         return await DbContext.Reservations.AsNoTracking().Include(e => e.Term).FirstOrDefaultAsync(e => e.Id == reservationId);
+    }
+
+    public async Task<ReservationHistoryEntity?> GetByUserIdAndTermId(string userId, int termId)
+    {
+        return await DbContext.ReservationHistories.Where(e => e.UserId.Equals(userId) && e.TermId == termId).FirstOrDefaultAsync();
     }
 
     public async Task<IEnumerable<ReservationEntity>> GetListByUserIdAsync(string userId)

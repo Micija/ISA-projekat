@@ -25,7 +25,13 @@ public class ReservationController : ControllerBase
     public async Task<ActionResult<LoginResponse>> CreateReservation(
        CreateReservationModel request)
     {
-        await _reservationService.CreateReservation(request, User.FindFirst(ClaimTypes.NameIdentifier)!.Value, User.FindFirst(ClaimTypes.Email)!.Value);
+        try
+        {
+            await _reservationService.CreateReservation(request, User.FindFirst(ClaimTypes.NameIdentifier)!.Value, User.FindFirst(ClaimTypes.Email)!.Value);
+        } catch (ArgumentException)
+        {
+            return BadRequest("Vec ste zakazivali ovaj termin. Nije vam dozvoljeno da opet rezervisete isti");
+        }
         return Ok();
     }
 
