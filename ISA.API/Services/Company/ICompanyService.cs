@@ -6,4 +6,5 @@ public interface ICompanyService
 {
     Task<IEnumerable<CompanyEntity>> GetAllAsync();
     Task<CompanyEntity?> GetByIdAsync(int id);
+    Task<IEnumerable<CompanyEntity>> GetCompaniesWhichUserCooperatedWithAsync(string userId);
 }

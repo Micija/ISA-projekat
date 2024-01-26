@@ -1,0 +1,83 @@
+<h2 class="d-4">Prijavljene zalbe</h2>
+
+<div *ngIf="answerAreaShown">
+    <textarea [(ngModel)]="answer"></textarea>
+    <br />
+    <button (click)="saveAnswer()" class="btn btn-success">Sacuvajte odgovor</button>
+</div>
+
+<table mat-table [dataSource]="dataSource"
+       class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef >
+      Id
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="text">
+    <th mat-header-cell *matHeaderCellDef >
+      Tekst
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="showComplaintText(element.id)">Tekst zalbe</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="userName">
+    <th mat-header-cell *matHeaderCellDef >
+      Korisnik
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <span>{{element.userName }} </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="companyName">
+    <th mat-header-cell *matHeaderCellDef >
+      Kompanija
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <span>{{element.companyName }} </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef >
+      Datum
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <span>{{element.date | date: 'dd.MM.yyyy. HH:mm' }} </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="answer">
+    <th mat-header-cell *matHeaderCellDef>
+      Odgovor
+    </th>
+    <td mat-cell *matCellDef="let element"> 
+        <button class="btn btn-primary" (click)="showAnswerArea(element.id)">Odgovor</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{complaintModalText}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

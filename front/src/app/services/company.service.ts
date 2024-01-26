@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class CompanyService {
+  
   getById(companyId: string) {
     return this.http.get<SingleCompany>(
       environment.backendBaseUrl + "Company/" + companyId);
@@ -17,6 +18,11 @@ export class CompanyService {
   getList() {
     return this.http.get<SingleCompany[]>(
       environment.backendBaseUrl + "Company");
+  }
+
+  getCompaniesForComplaint() {
+    return this.http.get<SingleCompany[]>(
+      environment.backendBaseUrl + "Company/Complaints");
   }
 
 }

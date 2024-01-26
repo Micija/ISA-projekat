@@ -7,4 +7,5 @@ public class CompanyEntity
     public string Address { get; set; } = default!;
     public virtual ICollection<EquipmentEntity> Equipment { get; set; } = default!;
     public virtual ICollection<TermEntity> Terms { get; set; } = default!;
+    public virtual ICollection<ComplaintEntity> Complaints { get; set; } = default!;
 }

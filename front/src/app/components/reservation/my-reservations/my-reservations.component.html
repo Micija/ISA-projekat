@@ -24,7 +24,7 @@
       Opcije
     </th>
     <td mat-cell *matCellDef="let element"> 
-        <button class="btn btn-danger" style="margin-left: 50px;" [disabled]="isBeforeToday(element.startDate)" (click)="cancelTerm(element.id)">Otkazivanje</button>
+        <button class="btn btn-danger" [disabled]="isBeforeToday(element.startDate)" (click)="cancelTerm(element.id)">Otkazivanje</button>
     </td>
   </ng-container>
 

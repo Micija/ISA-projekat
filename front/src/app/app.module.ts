@@ -9,8 +9,6 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './components/common/not-found/not-found.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { VerificationSuccessfulComponent } from './components/verification-successful/verification-successful.component';
-import { VerificationFailedComponent } from './components/verification-failed/verification-failed.component';
 import {MatSortModule} from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
@@ -22,6 +20,9 @@ import { IndexComponent } from './components/index/index.component';
 import { CompanyListComponent } from './components/company/company-list/company-list.component';
 import { CompanyOverviewComponent } from './components/company/company-overview/company-overview.component';
 import { MyReservationsComponent } from './components/reservation/my-reservations/my-reservations.component';
+import { ComposeComplaintComponent } from './components/complaint/compose-complaint/compose-complaint.component';
+import { MyComplaintsComponent } from './components/complaint/my-complaints/my-complaints.component';
+import { AdminComplaintsComponent } from './components/complaint/admin-complaints/admin-complaints.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +31,13 @@ import { MyReservationsComponent } from './components/reservation/my-reservation
     RegisterComponent,
     NotFoundComponent,
     LoginComponent,
-    VerificationSuccessfulComponent,
-    VerificationFailedComponent,
     IndexComponent,
     CompanyListComponent,
     CompanyOverviewComponent,
-    MyReservationsComponent
+    MyReservationsComponent,
+    ComposeComplaintComponent,
+    MyComplaintsComponent,
+    AdminComplaintsComponent,
   ],
   imports: [
     BrowserModule,

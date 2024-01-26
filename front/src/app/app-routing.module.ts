@@ -7,6 +7,9 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { CompanyListComponent } from './components/company/company-list/company-list.component';
 import { CompanyOverviewComponent } from './components/company/company-overview/company-overview.component';
 import { MyReservationsComponent } from './components/reservation/my-reservations/my-reservations.component';
+import { ComposeComplaintComponent } from './components/complaint/compose-complaint/compose-complaint.component';
+import { MyComplaintsComponent } from './components/complaint/my-complaints/my-complaints.component';
+import { AdminComplaintsComponent } from './components/complaint/admin-complaints/admin-complaints.component';
 
 const routes: Routes = [
   {
@@ -22,6 +25,21 @@ const routes: Routes = [
   {
     path: 'my-reservations',
     component: MyReservationsComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'compose-complaint',
+    component: ComposeComplaintComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'my-complaints',
+    component: MyComplaintsComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'admin-complaints',
+    component: AdminComplaintsComponent,
     pathMatch: 'full',
   },
   {

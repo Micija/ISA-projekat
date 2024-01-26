@@ -34,7 +34,7 @@ public class ReservationRepository : IReservationRepository
 
     public async Task<IEnumerable<ReservationEntity>> GetListByUserIdAsync(string userId)
     {
-        return await DbContext.Reservations.Include(e => e.Term).Where(e => e.Term != null && e.UserId.Equals(userId)).OrderByDescending(e => e.Term.TermStart).ToListAsync();
+        return await DbContext.Reservations.Include(e => e.Term).ThenInclude(e => e.Company).Where(e => e.Term != null && e.UserId.Equals(userId)).OrderByDescending(e => e.Term.TermStart).ToListAsync();
     }
 
 }

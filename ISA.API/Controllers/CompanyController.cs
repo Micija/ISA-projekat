@@ -1,6 +1,9 @@
 ﻿using ISA.API.Data.Entities;
+using ISA.API.Models.Company;
 using ISA.API.Services.Company;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ISA.API.Controllers;
 
@@ -31,5 +34,18 @@ public class CompanyController : ControllerBase
         }
 
         return Ok(company);
+    }
+
+    [Authorize]
+    [HttpGet("Complaints")]
+    public async Task<ActionResult<IEnumerable<CompanyEntity>>> GetCompaniesForComplaintsAsync()
+    {
+        var companies = await _companyService.GetCompaniesWhichUserCooperatedWithAsync(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+        return Ok(companies.Select(e => new CompanyForComplaint
+        {
+            Id = e.Id,
+            Address = e.Address,
+            Name = e.Name
+        }));
     }
 }

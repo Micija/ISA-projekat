@@ -1,4 +1,5 @@
 ﻿using ISA.API.Repository.Company;
+using ISA.API.Repository.Complaints;
 using ISA.API.Repository.Equipment;
 using ISA.API.Repository.Reservation;
 using ISA.API.Repository.Term;
@@ -14,6 +15,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IEquipmentRepository, EquipmentRepository>();
         services.AddScoped<ITermRepository, TermRepository>();
         services.AddScoped<IReservationRepository, ReservationRepository>();
+        services.AddScoped<IComplaintRepository, ComplaintRepository>();
 
         return services;
     }

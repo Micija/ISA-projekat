@@ -28,6 +28,26 @@
            aria-current="page" 
            routerLink="/my-reservations">Moje rezervacije</a>
         </li>
+
+
+        <li class="nav-item" *ngIf="isUserLoggedIn">
+          <a class="nav-link active text-white"
+           aria-current="page" 
+           routerLink="/my-complaints">Moje zalbe</a>
+        </li>
+
+
+        <li class="nav-item" *ngIf="isUserLoggedIn">
+          <a class="nav-link active text-white"
+           aria-current="page" 
+           routerLink="/admin-complaints">Zalbe</a>
+        </li>
+
+        <li class="nav-item" *ngIf="isUserLoggedIn">
+          <a class="nav-link active text-white"
+           aria-current="page" 
+           routerLink="/compose-complaint">Nova zalba</a>
+        </li>
       </ul>
 
       <div class="d-flex" style="column-gap: 20px;" *ngIf="!isUserLoggedIn">
