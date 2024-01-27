@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
       if (user) {
         this.isUserLoggedIn = true;
         this.userId = user.id;
-        this.isUserAdmin = user.role === 'ADMIN';
+        this.isUserAdmin = user.role === 'Admin';
       } else {
         this.isUserLoggedIn = false;
         this.userId = null;

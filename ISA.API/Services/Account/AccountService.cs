@@ -60,12 +60,14 @@ public class AccountService : IAccountService
             throw new UnauthorizedAccessException("Wrong username or password");
         }
 
+        var roles = await _userManager.GetRolesAsync(user);
         return new LoginResponse
         {
             Id = user.Id,
             FirstName = user.FirstName,
             LastName = user.LastName,
-            Jwt = await _jwtService.CreateJwt(user)
+            Jwt = await _jwtService.CreateJwt(user),
+            Role = roles.FirstOrDefault()!
         };
     }
 
@@ -103,7 +105,7 @@ public class AccountService : IAccountService
 
         var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
-        var url = "https://localhost:5001/Account/ConfirmEmail?token=" + token + "&email=" + user.Email;
+        var url = "https://localhost:5001/api/Account/ConfirmEmail?token=" + token + "&email=" + user.Email;
         var message = $"<p>Please confirm you account <a href='{url}'>here</a>.";
         await _emailService.SendEmail(user.Email, "Email confirmation", message, new List<Attachment>());
     }
