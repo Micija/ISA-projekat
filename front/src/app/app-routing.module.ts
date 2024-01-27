@@ -10,6 +10,7 @@ import { MyReservationsComponent } from './components/reservation/my-reservation
 import { ComposeComplaintComponent } from './components/complaint/compose-complaint/compose-complaint.component';
 import { MyComplaintsComponent } from './components/complaint/my-complaints/my-complaints.component';
 import { AdminComplaintsComponent } from './components/complaint/admin-complaints/admin-complaints.component';
+import { EmailConfirmationResendComponent } from './components/common/email-confirmation-resend/email-confirmation-resend.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: 'admin-complaints',
     component: AdminComplaintsComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'email-confirmation-resend',
+    component: EmailConfirmationResendComponent,
     pathMatch: 'full',
   },
   {

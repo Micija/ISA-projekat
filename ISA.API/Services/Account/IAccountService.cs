@@ -16,5 +16,10 @@ public interface IAccountService
     Task RegisterAsync(
         RegisterDto request, 
         CancellationToken cancellationToken);
+
+    Task<string> ConfirmEmail(
+     string userEmail,
+     string token);
+    Task ResendEmailConfirmation(string email);
 }
 

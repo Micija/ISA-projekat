@@ -23,6 +23,7 @@ import { MyReservationsComponent } from './components/reservation/my-reservation
 import { ComposeComplaintComponent } from './components/complaint/compose-complaint/compose-complaint.component';
 import { MyComplaintsComponent } from './components/complaint/my-complaints/my-complaints.component';
 import { AdminComplaintsComponent } from './components/complaint/admin-complaints/admin-complaints.component';
+import { EmailConfirmationResendComponent } from './components/common/email-confirmation-resend/email-confirmation-resend.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AdminComplaintsComponent } from './components/complaint/admin-complaint
     ComposeComplaintComponent,
     MyComplaintsComponent,
     AdminComplaintsComponent,
+    EmailConfirmationResendComponent,
   ],
   imports: [
     BrowserModule,

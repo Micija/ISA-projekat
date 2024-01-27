@@ -13,6 +13,11 @@ namespace ISA.API.Data.Configurations
             builder.Property(e => e.FirstName).IsRequired(true);
 
             builder.Property(e => e.LastName).IsRequired(true);
+            builder.Property(e => e.PenalPoints).IsRequired(true);
+            builder.Property(e => e.State).IsRequired(false);
+            builder.Property(e => e.City).IsRequired(false);
+            builder.Property(e => e.Phone).IsRequired(false);
+            builder.Property(e => e.Job).IsRequired(false);
         }
     }
 }

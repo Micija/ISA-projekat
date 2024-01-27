@@ -74,4 +74,10 @@ export class AuthService {
     return this.user$;
   }
 
+  resendEmailConfirmation(email: string) {
+    return this.http.post(environment.backendBaseUrl + 'Account/ResendEmailConfirmation', {
+      email
+    });
+  }
+
 }

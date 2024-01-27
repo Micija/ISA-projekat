@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { name, lastName, username, email, password, repeatedPassword, jmbg, prebivaliste, grad, drzava, brojTelefona, pol, zanimanje, info } = this.form;
+    const { name, lastName, email, password, repeatedPassword, state, city, job, phone } = this.form;
 
     if (password !== repeatedPassword) {
       alert("Lozinke se ne poklapaju!")
@@ -39,7 +39,11 @@ export class RegisterComponent implements OnInit {
            firstName:name,
            lastName, 
            email,
-           password
+           password,
+           state,
+           job,
+           phone,
+           city
         }).subscribe({
       next: data => {
         this.isSuccessful = true;

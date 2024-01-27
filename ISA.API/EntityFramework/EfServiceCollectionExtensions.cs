@@ -19,7 +19,7 @@ namespace ISA.API.EntityFramework
             services.AddIdentityCore<UserEntity>(options =>
             {
                 options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
 
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;

@@ -1,4 +1,5 @@
-﻿using ISA.API.Models.Account;
+﻿using ISA.API.Data.Entities;
+using ISA.API.Models.Account;
 using ISA.API.Services.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -62,5 +63,34 @@ public class AccountController : ControllerBase
         {
             return BadRequest(exception.Message);
         }
+    }
+
+    [HttpGet("ConfirmEmail")]
+    public async Task<ActionResult> ConfirmEmail(
+    [FromQuery] string token,
+    [FromQuery] string email)
+    {
+        var response = await _accountService.ConfirmEmail(email, token);
+        if (response.Equals("1"))
+        {
+            return BadRequest("Email is not valid");
+        } else if (response.Equals("2"))
+        {
+            return BadRequest("Account is already confirmed");
+        } else if (response.Equals("3"))
+        {
+            return BadRequest("Token is not valid");
+        }
+
+        return Ok("Nalog je aktiviran. Idite na stranicu za prijavu");
+    }
+
+    [HttpPost("ResendEmailConfirmation")]
+    public async Task<ActionResult> ResendEmailConfirmation(
+   [FromBody] EmailConfirmation request)
+    {
+        await _accountService.ResendEmailConfirmation(request.Email);
+
+        return Ok();
     }
 }
