@@ -11,12 +11,15 @@ import { ComposeComplaintComponent } from './components/complaint/compose-compla
 import { MyComplaintsComponent } from './components/complaint/my-complaints/my-complaints.component';
 import { AdminComplaintsComponent } from './components/complaint/admin-complaints/admin-complaints.component';
 import { EmailConfirmationResendComponent } from './components/common/email-confirmation-resend/email-confirmation-resend.component';
+import { AuthGuardGuard } from './guards/auth-guard.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
     path: 'company/:id',
     component: CompanyOverviewComponent,
     pathMatch: 'full',
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'company',
@@ -27,21 +30,25 @@ const routes: Routes = [
     path: 'my-reservations',
     component: MyReservationsComponent,
     pathMatch: 'full',
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'compose-complaint',
     component: ComposeComplaintComponent,
     pathMatch: 'full',
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'my-complaints',
     component: MyComplaintsComponent,
     pathMatch: 'full',
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'admin-complaints',
     component: AdminComplaintsComponent,
     pathMatch: 'full',
+    canActivate: [AuthGuardGuard, AdminGuard]
   },
   {
     path: 'email-confirmation-resend',
