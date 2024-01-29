@@ -102,7 +102,7 @@ public class ReservationService : IReservationService
             await _reservationRepository.CreateItem(item);
         }
 
-        var qrCode = _qrCodeService.CreateQRCode("test");
+        var qrCode = _qrCodeService.CreateQRCode($"Rezervacija - {reservation.Id}");
         var attach = new Attachment(new MemoryStream(qrCode), "qr-code.png", MediaTypeNames.Application.Octet);
 
         await _emailService.SendEmail(userEmail, "Potvrda rezervacije", "Vasa rezervacija je sacuvana", new List<Attachment> { attach });
