@@ -97,7 +97,7 @@ public class AccountService : IAccountService
             throw new ArgumentException(result.Errors.ToString());
         }
 
-        var roleResult = await _userManager.AddToRoleAsync(user, "Admin");
+        var roleResult = await _userManager.AddToRoleAsync(user, "User");
         if (!roleResult.Succeeded)
         {
             throw new ArgumentException(result.Errors.ToString());

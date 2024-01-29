@@ -27,7 +27,8 @@ public class ComplaintService : IComplaintService
             CompanyId = request.CompanyId,
             Date = DateTime.Now,
             Text = request.Text,
-            UserId = userId
+            UserId = userId,
+            Answer = string.Empty
         };
 
         await _complaintRepository.CreateAsync(entity);
